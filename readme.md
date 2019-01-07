@@ -25,14 +25,14 @@ Each line of config.ini explained:
 1. Mee6 Server ID: the number from the Mee6 leaderboard url (see above). *REQUIRED FIELD*
 2. Number of members (3 - 1000): How many server top members the program should take into account, sample size. Default is `100`
 3. Level cutoffs for pie chart: You decide the level ranges for the pie chart slices, separate with commas. Default is `10,20,30,40,50`
-4. Names for each level range: For the pie chart legend. Useful if your server has roles when you reach certain levels and you want to show them (eg "Bronze, Silver, Gold"). Write `na` to auto generate descriptions for the legend
+4. Names for each level range: For the pie chart legend. Useful if your server has roles when members reach certain levels and you want to show them (eg "Bronze, Silver, Gold"). Write `na` to auto generate descriptions for the legend
 5. Dependent var for leaderboard: Plot the leaderboard bar graph with level or xp on the y-axis. `lvl` for levels, `exp` for xp. Default is `lvl`
 
 Example of a valid config.ini file: 
 ```
 123456789123456789
 500
-5, 10, 20, 30, 50
+5,10,20,30,50
 na
 exp
 ```
