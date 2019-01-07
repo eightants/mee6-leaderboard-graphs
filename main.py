@@ -44,6 +44,7 @@ plt.subplot(223)
 server.lvldistribution()
 plt.subplot(224)
 server.randomstats()
+plt.subplots_adjust(hspace=0.3)
 plt.show()
 
 
