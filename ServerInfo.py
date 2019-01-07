@@ -139,7 +139,7 @@ class ServerInfo:
         piestats = []
         for n in range(len(self.tally)): 
             percent = (self.tally[n] / self.top) * 100
-            piestats.append(str(percent) + "% are " + str(self.statusnames[n]))
+            piestats.append(str(round(percent, 2)) + "% are " + str(self.statusnames[n]))
         # statement about first place
         leader = str(self.username[0]) + " is first place at level " + str(self.level[0]) + " and " + str(self.exp[0]) + " XP"
         # central tendencies of data
@@ -153,7 +153,7 @@ class ServerInfo:
             if level > avglevel: 
                 aboveavg += 1
         mean = "The mean level is " + str(avglevel)
-        percentabove = str(aboveavg * 100 / self.top) + "% of the top " + str(self.top) + " is above the mean level"
+        percentabove = str(round(aboveavg * 100 / self.top, 2)) + "% of the top " + str(self.top) + " is above the mean level"
         # gathers all text into a list
         textlist = piestats + [leader, mode, median, mean, percentabove]
         # formats the text with line breaks and plots it
