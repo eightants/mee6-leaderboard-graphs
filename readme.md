@@ -1,5 +1,5 @@
 # Mee6 Leaderboard Graphs
-And...done! Spent a couple days working on this little project. I always thought that the Mee6 leaderboard site has great data for some demographic charts, especially its use in popular servers. This should work with all Discord servers that use the Mee6 bot. Let me know if there are any bugs. 
+Here you go! Spent a couple days working on this little project. I always thought that the Mee6 leaderboard site has great data for some demographic charts, especially its use in popular servers. This should work with all Discord servers that use the Mee6 bot. Let me know if there are any bugs. 
 
 ## What it does
 This program creates graphs to visualize up to the top 1000 members of your Discord server. The graphs include a pie chart showing a breakdown of level ranges of members, a leaderboard the top members and their levels/experience represented in a bar graph, a histogram showing the frequency distribution of levels in the sample, and a few more general analytics statements. 
