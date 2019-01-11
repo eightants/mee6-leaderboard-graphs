@@ -9,8 +9,8 @@ from ServerInfo import ServerInfo
 # --------
 with open('config.ini', 'r') as configfile: 
     configs = configfile.readlines()
-    # checks that config file has 5 lines
-    if not len(configs) == 5: 
+    # checks that config file has 6 lines
+    if not len(configs) == 6: 
         print("Invalid config file: incorrect number of lines!")
     else: 
         try: 
@@ -28,11 +28,19 @@ with open('config.ini', 'r') as configfile:
             # setting statusnames
             statusnames = list(configs[3].strip("\n").strip(" ").split(","))
             yvar = configs[4]
+            # output csv?
+            printcsv = configs[5]
+            csv = False
+            if printcsv == 'y': 
+                csv = True
         except: 
             print("An error ocurred, please recheck config.ini")
 
 # sets server variable
 server = ServerInfo(url, top)
+# csv
+if csv: 
+    server.csv()
 # plots figure
 plt.figure()
 plt.suptitle(server.servername)

@@ -26,6 +26,7 @@ Each line of config.ini explained:
 3. Level cutoffs for pie chart: You decide the level ranges for the pie chart slices, separate with commas. Default is `10,20,30,40,50`
 4. Names for each level range: For the pie chart legend. Useful if your server has roles when members reach certain levels and you want to show them (eg "Bronze, Silver, Gold"). Write `na` to auto generate descriptions for the legend
 5. Dependent var for leaderboard: Plot the leaderboard bar graph with level or xp on the y-axis. `lvl` for levels, `exp` for xp. Default is `lvl`
+6. Specify whether to output a csv file with data for the number of members graphed. `y` for yes. Default is `n`
 
 Example of a valid config.ini file: 
 ```
@@ -34,6 +35,7 @@ Example of a valid config.ini file:
 5,10,20,30,50
 na
 exp
+y
 ```
 
 ### Running the program

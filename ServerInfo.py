@@ -14,6 +14,7 @@ class ServerInfo:
         res = requests.get(URL)
         # res.json() is now the entire webpage API as a dictionary
         self.servername = res.json()["guild"]["name"]
+        print("server name: " + str(self.servername))
         # catches errors associated with inputs for top n members
         maxtop = False
         if top < 3: 
@@ -41,6 +42,7 @@ class ServerInfo:
         else: 
             self.username, self.discordtag, self.exp, self.level = username, discordtag, exp, level
         self.top = top
+        print("number of members to graph: " + str(top))
     
     def csv(self): 
         '''
@@ -52,6 +54,7 @@ class ServerInfo:
             fileWriter.writerow(header)
             for i in range(len(self.username)): 
                 fileWriter.writerow([self.username[i], self.discordtag[i], self.exp[i], self.level[i]])
+            print("mee6-leaderboard.csv created")
 
     def statuspie(self, statuslevels=[10, 20, 30, 40, 50], statusnames=""): 
         """
@@ -88,6 +91,9 @@ class ServerInfo:
             for i in range(1, len(statuslevels)):
                 labels.append("lvl" + str(statuslevels[i - 1]) + " to lvl" + str(statuslevels[i]))
             labels.append("above lvl" + str(statuslevels[-1]))
+        # prints inputs to terminal
+        print("level cutoffs: " + str(statuslevels))
+        print("level range names: " + str(labels))
         # generates pie chart
         self.tally = tally
         self.statusnames = labels
@@ -105,11 +111,11 @@ class ServerInfo:
         if yvar == "exp": 
             bars = self.exp[0:self.top]
             yvarname = "Experience"
+            print("yvar: exp")
         else: 
             bars = self.level[0:self.top]
             yvarname = "Level"
-            if not yvar == "lvl" and not yvar == "na": 
-                print("rankbar(): illegal value entered for yvar, can only be 'lvl' or 'exp', reverted to default. ")
+            print("yvar: lvl")
         labels = list(range(1, self.top + 1))
         plt.bar(labels, bars)
         plt.title("Leaderboard")
