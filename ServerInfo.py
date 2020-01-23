@@ -29,7 +29,7 @@ class ServerInfo:
             maxtop = True
             top = 999
         # the members information is contained in a list of 100(default) dictionaries, one dictionary per member
-        username, discordtag, exp, level = [], [], [], []
+        username, discordtag, exp, level, messages = [], [], [], [], []
         print("number of members in server:", len(res.json()["players"]))
         # makes sure the server has enough members to graph the top 100/1000 of, else, cap it at an amount
         if top > len(res.json()["players"]):
@@ -40,13 +40,14 @@ class ServerInfo:
             discordtag.append("#" + str(user['discriminator']))
             exp.append(user['xp'])
             level.append(user['level'])
+            messages.append(user['message_count'])
         # Somehow the json link only contains the top 999 entries
         # To make graph titles nicer to read, this makes it 1000 by duplicating the last element
         if maxtop: 
-            self.username, self.discordtag, self.exp, self.level = username + [username[-1]], discordtag + [discordtag[-1]], exp + [exp[-1]], level + [level[-1]]
+            self.username, self.discordtag, self.exp, self.level, self.messages = username + [username[-1]], discordtag + [discordtag[-1]], exp + [exp[-1]], level + [level[-1]], messages + [messages[-1]]
             top = 1000
         else: 
-            self.username, self.discordtag, self.exp, self.level = username, discordtag, exp, level
+            self.username, self.discordtag, self.exp, self.level, self.messages = username, discordtag, exp, level, messages
         self.top = top
         print("number of members to graph: " + str(top))
         print("----------")
@@ -57,10 +58,10 @@ class ServerInfo:
         '''
         with open("mee6-leaderboard.csv", "w", newline="", encoding = "utf-8") as outfile: 
             fileWriter = csv.writer(outfile)
-            header = ["username", "discord tag", "exp", "level"]
+            header = ["username", "discord tag", "exp", "level", "messages sent"]
             fileWriter.writerow(header)
             for i in range(len(self.username)): 
-                fileWriter.writerow([self.username[i], self.discordtag[i], self.exp[i], self.level[i]])
+                fileWriter.writerow([self.username[i], self.discordtag[i], self.exp[i], self.level[i], self.messages[i]])
             print("mee6-leaderboard.csv created")
 
     def statuspie(self, statuslevels=[10, 20, 30, 40, 50], statusnames=""): 
