@@ -13,6 +13,7 @@ class ServerInfo:
     def __init__(self, URL, top=100): 
         res = requests.get(URL)
         # res.json() is now the entire webpage API as a dictionary
+        print("Communicating with the Mee6 servers...")
         self.servername = res.json()["guild"]["name"]
         print("server name: " + str(self.servername))
         # catches errors associated with inputs for top n members
@@ -29,6 +30,11 @@ class ServerInfo:
             top = 999
         # the members information is contained in a list of 100(default) dictionaries, one dictionary per member
         username, discordtag, exp, level = [], [], [], []
+        print("number of members in server:", len(res.json()["players"]))
+        # makes sure the server has enough members to graph the top 100/1000 of, else, cap it at an amount
+        if top > len(res.json()["players"]):
+            top = len(res.json()["players"])
+            print("top: cannot be greater than number of members in server, changed to", len(res.json()["players"]))
         for user in res.json()['players'][0:top]:
             username.append(user['username'])
             discordtag.append("#" + str(user['discriminator']))
@@ -43,6 +49,7 @@ class ServerInfo:
             self.username, self.discordtag, self.exp, self.level = username, discordtag, exp, level
         self.top = top
         print("number of members to graph: " + str(top))
+        print("----------")
     
     def csv(self): 
         '''
@@ -77,7 +84,8 @@ class ServerInfo:
         # creates array to tally number of members in each rank status
         tally = np.zeros(len(statuslevels), dtype=int)
         # tallies up number of members in each level category
-        for i in range(self.top): 
+        #print(self.level)
+        for i in range(len(self.level)): 
             userlevel = self.level[i]
             for n in reversed(range(len(statuslevels))):
                 if userlevel >= statuslevels[n]:
